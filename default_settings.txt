@@ -3,16 +3,16 @@ Scenario.name = default_scenario
 Scenario.simulateConnections = true
 Scenario.updateInterval = 0.1
 # 43200s == 12h
-Scenario.endTime = 10000000
-Scenario.endTime = 43200
+#Scenario.endTime = 10000000
+Scenario.endTime = 10800
 
 # "Bluetooth" interface for all nodes
 btInterface.type = SimpleBroadcastInterface
 # Transmit speed of 2 Mbps = 250kBps
 btInterface.transmitSpeed = 250k
-btInterface.transmitRange = 10
+btInterface.transmitRange = 50
 
-Scenario.nrofHostGroups = 3
+Scenario.nrofHostGroups = 2
 
 ## Group-specific settings:
 # groupID : Group's identifier. Used as the prefix of host names
@@ -33,28 +33,28 @@ Scenario.nrofHostGroups = 3
 # routeFile: route's file path - for MapRouteMovement
 # routeType: route's type - for MapRouteMovement
 
+Group1.groupID = g
+Group2.groupID = n
+
+
 Group.router = ContourRouter
-ContourRouter.ctrSize = 10
-ContourRouter.gateway = 500, 500
+ContourRouter.ctrSize = 200
+ContourRouter.gateway = 800, 1000
 Group.bufferSize = 5M
-Group.waitTime = 0, 120
+Group.waitTime = 1, 3
 # All nodes have the bluetooth interface
 Group.nrofInterfaces = 1
 Group.interface1 = btInterface
 # Walking speeds
-Group.speed = 0.5, 1.5
+Group.speed = 1.5, 2
+# Group.msgTtl = 30
 
-Group1.groupID = b
-Group2.groupID = g
-Group3.groupID = n
+
 Group1.movementModel = StationaryMovement
-Group2.movementModel = StationaryMovement
-Group3.movementModel = RandomWaypoint
+Group2.movementModel = RandomWaypoint
 Group1.nrofHosts = 1
-Group1.nodeLocation = 1000, 1000
-Group2.nrofHosts = 1
-Group2.nodeLocation = 500, 500
-Group3.nrofHosts = 50
+Group1.nodeLocation = 800, 1000
+Group2.nrofHosts = 50
 
 ## Message creation parameters 
 # How many event generators
@@ -64,11 +64,11 @@ Events1.class = MessageEventGenerator
 # (following settings are specific for the MessageEventGenerator class)
 # Creation interval in seconds (one new message every 25 to 35 seconds)
 Events1.interval = 25,35
-# Message sizes (500kB - 1MB)
-Events1.size = 500k,1M
+# Message sizes (5kB to 10 kB)
+Events1.size = 5k,10k
 # range of message source/destination addresses
-Events1.hosts = 2,27
-Events1.tohosts = 1,2
+Events1.hosts = 1,26
+Events1.tohosts = 0,1
 # Message ID prefix
 Events1.prefix = M
 
@@ -91,14 +91,14 @@ Optimization.randomizeUpdateOrder = true
 ## Reports - all report names have to be valid report classes
 
 # how many reports to load
-Report.nrofReports = 2
+Report.nrofReports = 1
 # length of the warm up period (simulated seconds)
 Report.warmup = 0
 # default directory of reports (can be overridden per Report with output setting)
 Report.reportDir = reports/
 # Report classes to load
-Report.report1 = ContactTimesReport
-Report.report2 = ConnectivityONEReport
+Report.report1 = MessageStatsReport
+# Report.report2 = ConnectivityONEReport
 
 ## GUI settings
 
