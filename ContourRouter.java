@@ -120,7 +120,7 @@ public class ContourRouter extends ActiveRouter {
 		return new ContourRouter(this);
 	}
 	
-	protected boolean inSpin(DTNHost node) { 
+	public boolean inSpin(DTNHost node) { 
 		if(distanceFromGateway(node)<contourSize)
 		return true;
 		else return false;
